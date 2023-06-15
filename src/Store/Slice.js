@@ -5,10 +5,27 @@ const todoSlicer = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    addTodo: (state, action) => {
-      state.push(action.payload);
+    addTodo: async (state, action) => {
+      await state.push(action.payload);
       return state;
     },
+  },
+
+  deleteTodo: async (state, action) => {
+    await state.filter((todo) => todo.id !== action.payload);
+    return state;
+  },
+
+  updateTodo: async (state, action) => {
+    const { id, updateTodo } = action.payload;
+
+    let todoUpdate = await state.findIndex((todo) => {
+      todo.id === id
+    });
+    if (todoUpdate !== -1) {
+      state[todoUpdate] = { ...state[todoUpdate], ...[updateTodo] };
+    }
+    return state;
   },
 });
 
