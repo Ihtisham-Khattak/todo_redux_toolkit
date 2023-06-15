@@ -13,4 +13,4 @@ const todoSlicer = createSlice({
 });
 
 export const { addTodo } = todoSlicer.actions;
-export default todoSlicer = todoSlicer.reducer;
+export const todoSlice = todoSlicer.reducer;
